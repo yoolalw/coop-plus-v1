@@ -2,6 +2,7 @@ package com.coop_plus.api.Entitys;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.processing.Pattern;
 
 @Entity
 @Getter
@@ -13,8 +14,6 @@ public class ClientEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Integer id;
-
-    @Column(nullable = false, name = "nome")
     private String nomeCompleto;
 
     private String endereco;

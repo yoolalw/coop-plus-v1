@@ -17,17 +17,10 @@ public class EmployeeEntity {
     @Id
     private Integer id;
 
-    @Column(nullable = false, name = "nome")
     private String nomeCompleto;
-
-    @Column(nullable = false, name = "servico")
     private String tipoServico;
-
-    @Column(nullable = true, name = "empresa")
     private String nomeEmpresa;
-
     private Boolean favorito;
-
     private String descricao;
     private Integer cnpj;
     private Integer telefone;
