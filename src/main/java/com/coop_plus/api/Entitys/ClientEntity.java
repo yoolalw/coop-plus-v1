@@ -5,21 +5,27 @@ import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
 @Entity
+@Table(name = "clients")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "clients")
 public class ClientEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Integer id;
 
-    @Pattern(regexp = "^[a-z]+/i$", message = "O nome deve conter apenas letras.")
+    @Pattern(
+            regexp = "^[A-Za-zÀ-ÿ]+(?: [A-Za-zÀ-ÿ]+)*$",
+            message = "O nome deve conter apenas letras."
+    )
     private String nomeCompleto;
 
     private String endereco;
     private String email;
-    private Integer cpf;
-    private Integer telefone;
+    @Pattern(regexp = "^[0-9]{3}[.][0-9]{3}[.][0-9]{3}[-][0-9]{2}$", message = "CPF não encontrado.")
+    private String cpf;
+
+    @Pattern(regexp = "^[0-9]{2}\s[9]{1}\s[0-9]{4}[-][0-9]{4}$")
+    private String telefone;
 }

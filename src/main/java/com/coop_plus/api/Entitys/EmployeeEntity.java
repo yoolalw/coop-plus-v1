@@ -8,11 +8,11 @@ import lombok.Setter;
 import jakarta.validation.constraints.Pattern;
 
 @Entity
+@Table(name = "employeers")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "employeers")
 public class EmployeeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
