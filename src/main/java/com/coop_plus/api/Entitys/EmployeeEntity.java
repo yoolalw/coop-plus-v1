@@ -18,15 +18,28 @@ public class EmployeeEntity {
     @Id
     private Integer id;
 
-    @Pattern(regexp = "^[a-z]+/i$", message="O nome deve conter apenas letras.")
+    @Pattern(
+            regexp = "^[A-Za-zÀ-ÿ]+(?: [A-Za-zÀ-ÿ]+)*$",
+            message = "O nome deve conter apenas letras."
+    )
     private String nomeCompleto;
 
+    @Pattern(
+            regexp = "^[A-Za-zÀ-ÿ]+(?: [A-Za-zÀ-ÿ]+)*$",
+            message = "O tipo de serviço só pode ser dito com palavras."
+    )
     private String tipoServico;
+
     private String nomeEmpresa;
+
     private Boolean favorito;
     private String descricao;
-    private Integer cnpj;
-    private Integer telefone;
+
+    @Pattern(regexp = "^[0-9]{2}[.][0-9]{3}[.][0-9]{3}[/][0-9]{4}[-][0-9]{2}")
+    private String cnpj;
+
+    @Pattern(regexp = "^[0-9]{2}\s[9]{1}\s[0-9]{4}[-][0-9]{4}$")
+    private String telefone;
 
 
 }
