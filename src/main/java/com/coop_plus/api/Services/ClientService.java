@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class ClientService {
@@ -23,11 +24,24 @@ public class ClientService {
         if (repository.existsByEmail(client.getEmail())) {
             throw new IllegalArgumentException();
         }
-        
         return repository.save(client);
     }
 
+    public ClientEntity atualizarUsuario(Integer id, ClientEntity clientAtt) {
+        ClientEntity exists = repository.findById(id).orElseThrow(NoSuchElementException::new);
+        exists.setNomeCompleto(clientAtt.getNomeCompleto());
+        exists.setEndereco(clientAtt.getEndereco());
+        exists.setEmail(clientAtt.getEmail());
+        exists.setSenha(clientAtt.getSenha());
+        exists.setCpf(clientAtt.getCpf());
+        exists.setTelefone(clientAtt.getCpf());
 
-
-
+        return repository.save(exists);
+    }
+    public void deletarUsuario(Integer id){
+        if(!repository.existsById(id)){
+            throw new NoSuchElementException("Este usuário nao existe.");
+        }
+        repository.deleteById(id);
+    }
 }
