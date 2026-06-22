@@ -22,9 +22,18 @@ public class ClientController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<ClientEntity> cadastrarUsuario(@Valid @RequestBody ClientEntity client){
+    public ResponseEntity<ClientEntity> cadastrarCliente(@Valid @RequestBody ClientEntity client){
         return ResponseEntity.ok(service.cadastrarUsuario(client));
     }
 
+    @PutMapping("/att/{id}")
+    public ResponseEntity<ClientEntity> atualizarCliente(@PathVariable Integer id, @RequestBody ClientEntity client){
+        return ResponseEntity.ok(service.atualizarUsuario(id, client));
+    }
+
+    @DeleteMapping("/del/{id}")
+    public void deletarCliente(@PathVariable Integer id){
+        service.deletarUsuario(id);
+    }
 
 }
