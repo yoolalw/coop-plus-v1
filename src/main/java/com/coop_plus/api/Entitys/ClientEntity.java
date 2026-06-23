@@ -73,4 +73,8 @@ public class ClientEntity implements UserDetails {
     public boolean isEnabled() {
         return UserDetails.super.isEnabled();
     }
+
+    public Object getRole(UserRole userRole) {
+        return userRole;
+    }
 }

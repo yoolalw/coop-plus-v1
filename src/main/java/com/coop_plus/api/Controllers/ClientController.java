@@ -1,10 +1,12 @@
 package com.coop_plus.api.Controllers;
 
 import com.coop_plus.api.Entitys.ClientEntity;
+import com.coop_plus.api.Entitys.UserRole;
 import com.coop_plus.api.Services.ClientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +25,9 @@ public class ClientController {
 
     @PostMapping("/new")
     public ResponseEntity<ClientEntity> cadastrarCliente(@Valid @RequestBody ClientEntity client){
-        return ResponseEntity.ok(service.cadastrarUsuario(client));
+        String bcrypt = new BCryptPasswordEncoder().encode(client.getPassword());
+        ResponseEntity.ok(service.cadastrarUsuario(client));
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/att/{id}")
