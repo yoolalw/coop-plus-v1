@@ -23,12 +23,6 @@ public class ClientController {
         return ResponseEntity.ok(service.listarClientes());
     }
 
-    @PostMapping("/new")
-    public ResponseEntity<ClientEntity> cadastrarCliente(@Valid @RequestBody ClientEntity client){
-        String bcrypt = new BCryptPasswordEncoder().encode(client.getPassword());
-        ResponseEntity.ok(service.cadastrarUsuario(client));
-        return ResponseEntity.ok().build();
-    }
 
     @PutMapping("/att/{id}")
     public ResponseEntity<ClientEntity> atualizarCliente(@PathVariable Integer id, @RequestBody ClientEntity client){

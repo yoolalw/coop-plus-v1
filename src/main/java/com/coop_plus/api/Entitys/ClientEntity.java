@@ -39,6 +39,9 @@ public class ClientEntity implements UserDetails {
 
     private UserRole role;
 
+    public ClientEntity(String email, String bcrypt, UserRole role) {
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
