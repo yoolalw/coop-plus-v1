@@ -20,13 +20,6 @@ public class ClientService {
         return repository.findAll(sort);
     }
 
-    public ClientEntity cadastrarUsuario(ClientEntity client) {
-        if (repository.existsByEmail(client.getEmail())) {
-            throw new IllegalArgumentException();
-        }
-        return repository.save(client);
-    }
-
     public ClientEntity atualizarUsuario(Integer id, ClientEntity clientAtt) {
         ClientEntity exists = repository.findById(id).orElseThrow(NoSuchElementException::new);
         exists.setNomeCompleto(clientAtt.getNomeCompleto());

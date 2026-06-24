@@ -28,6 +28,9 @@ public class SecutiryConfiguration {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.GET, "/client").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/client/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/employes").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/employes/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/newClient").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/newEmployee").permitAll()

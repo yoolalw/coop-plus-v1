@@ -21,6 +21,11 @@ public class EmployeeController {
         return ResponseEntity.ok(service.listar());
     }
 
+    @GetMapping("/employee/{id}")
+    public ResponseEntity<EmployeeEntity> buscarPeloId(@PathVariable Integer id){
+        return ResponseEntity.ok(service.buscarPeloId(id));
+    }
+
     @PutMapping("/attEmployee/{id}")
     public ResponseEntity<EmployeeEntity> atualizar(@PathVariable Integer id, @RequestBody EmployeeEntity employee){
         return ResponseEntity.ok(service.atualizar(id, employee));

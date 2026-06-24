@@ -20,16 +20,10 @@ public class EmployeeService {
         return repository.findAll(sort);
     }
 
-    public EmployeeEntity buscarPeloId(Integer id){
+    public EmployeeEntity buscarPeloId(Integer id) {
         return repository.findById(id).orElseThrow(NoSuchElementException::new);
     }
 
-    public EmployeeEntity cadastrar(EmployeeEntity employee) {
-        if (!repository.existsByEmail(employee.getEmail())) {
-            throw new IllegalArgumentException("Este email ja está sendo usado.");
-        }
-        return repository.save(employee);
-    }
 
     public EmployeeEntity atualizar(Integer id, EmployeeEntity employee) {
         EmployeeEntity exists = repository.findById(id).orElseThrow(NoSuchElementException::new);
