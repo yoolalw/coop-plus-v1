@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -72,5 +74,11 @@ public class AuthenticationController {
         EmployeeEntity employeeEntity = new EmployeeEntity(employee.nomeCompleto(), employee.tipoServico(), employee.email(), bcrypt, employee.nomeEmpresa(), employee.descricao(), employee.cnpj(), employee.telefone(), employee.role());
         this.employeeRepository.save(employeeEntity);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/session")
+    public ResponseEntity<String> obterPerfil(){
+        UserDetails usuario = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return ResponseEntity.ok("Seja bem-vindo, " + usuario.getUsername());
     }
 }
