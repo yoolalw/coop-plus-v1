@@ -29,7 +29,7 @@ public class SecutiryConfiguration {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.GET, "/client").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/client/new").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/newClient").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/admin").hasRole("admin")
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

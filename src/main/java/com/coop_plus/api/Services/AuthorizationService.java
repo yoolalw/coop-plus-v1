@@ -22,7 +22,7 @@ public class AuthorizationService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserDetails emp = employeeRepository.findByEmail(username).orElseThrow(NoSuchElementException::new);
-        UserDetails cli = clientRepository.findByEmail(username).orElseThrow(NoSuchElementException::new);
+        UserDetails cli = clientRepository.findByEmail(username);
         throw new UsernameNotFoundException("Usuario não encontrado.");
     }
 }

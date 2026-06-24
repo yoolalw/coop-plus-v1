@@ -39,8 +39,35 @@ public class ClientEntity implements UserDetails {
 
     private UserRole role;
 
-    public ClientEntity(String email, String bcrypt, UserRole role) {
+    public ClientEntity(String nomeCompleto, String endereco, String email, String senha, String cpf, String telefone, UserRole role){
+        this.nomeCompleto = nomeCompleto;
+        this.endereco = endereco;
+        this.email = email;
+        this.senha = senha;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.role = role;
     }
+/*
+{
+    "nomeCompleto": "Abcd",
+    "endereco":"A 1, V2",
+    "email":"a@email.com",
+    "senha":"aaa",
+    "cpf":"000.000.000.01",
+    "telefone": "01 9 0000-1111",
+    "role": "USER"
+}
+ */
+    /*
+    "nomeCompleto": "",
+    "endereco":"",
+    "email":"",
+    "senha":"",
+    "cpf":"000.000.000.01",
+    "telefone": "01 9 0000-1111",
+    "role": "client"
+     */
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -49,7 +76,7 @@ public class ClientEntity implements UserDetails {
 
     @Override
     public @Nullable String getPassword() {
-        return "";
+        return senha;
     }
 
     @Override
