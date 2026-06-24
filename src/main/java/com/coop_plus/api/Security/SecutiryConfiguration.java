@@ -30,6 +30,7 @@ public class SecutiryConfiguration {
                         .requestMatchers(HttpMethod.GET, "/client").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/newClient").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/newEmployee").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/admin").hasRole("admin")
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

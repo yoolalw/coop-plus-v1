@@ -21,11 +21,6 @@ public class EmployeeController {
         return ResponseEntity.ok(service.listar());
     }
 
-    @PostMapping("/newEmployee")
-    public ResponseEntity<EmployeeEntity> cadastrar(@Valid @RequestBody EmployeeEntity employee){
-        return ResponseEntity.ok(service.cadastrar(employee));
-    }
-
     @PutMapping("/attEmployee/{id}")
     public ResponseEntity<EmployeeEntity> atualizar(@PathVariable Integer id, @RequestBody EmployeeEntity employee){
         return ResponseEntity.ok(service.atualizar(id, employee));

@@ -39,7 +39,7 @@ public class EmployeeEntity implements UserDetails {
     private String senha;
     private String nomeEmpresa;
 
-    private Boolean favorito;
+
     private String descricao;
 
     @Pattern(regexp = "^[0-9]{2}[.][0-9]{3}[.][0-9]{3}[/][0-9]{4}[-][0-9]{2}")
@@ -47,6 +47,38 @@ public class EmployeeEntity implements UserDetails {
 
     @Pattern(regexp = "^[0-9]{2}\s[9]{1}\s[0-9]{4}[-][0-9]{4}$")
     private String telefone;
+
+    private UserRole role;
+
+    public EmployeeEntity(String nomeCompleto, String tipoServico, String email,
+                          String senha, String nomeEmpresa, String descricao,
+                          String cnpj, String telefone, UserRole role) {
+        this.nomeCompleto = nomeCompleto;
+        this.tipoServico = tipoServico;
+        this.email = email;
+        this.senha = senha;
+        this.nomeEmpresa = nomeEmpresa;
+        this.descricao = descricao;
+        this.cnpj = cnpj;
+        this.telefone = telefone;
+        this.role = role;
+    }
+
+    /*
+
+    {
+        "nomeCompleto": "",
+        "tipoServico": "",
+        "email": "",
+        "senha":"",
+        "nomeEmpresa":"",
+        "descricao":"",
+        "cnpj": "00.000.000/1111-11",
+        "telefone": "01 9 1111-1111",
+        "role": "EMPLOYEE"
+    }
+
+     */
 
 
     @Override
@@ -56,7 +88,7 @@ public class EmployeeEntity implements UserDetails {
 
     @Override
     public @Nullable String getPassword() {
-        return "";
+        return senha;
     }
 
     @Override
@@ -83,4 +115,6 @@ public class EmployeeEntity implements UserDetails {
     public boolean isEnabled() {
         return UserDetails.super.isEnabled();
     }
+
+
 }

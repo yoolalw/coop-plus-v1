@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.coop_plus.api.Entitys.ClientEntity;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import com.auth0.jwt.algorithms.Algorithm;
 
@@ -21,12 +22,12 @@ public class TokenService {
     @Value("${api.security.token.secret}")
     private String secret;
 
-    public String generateToken(ClientEntity client) {
+    public String generateToken(UserDetails userDetails) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
                     .withIssuer("auth-api")
-                    .withSubject(client.getEmail())
+                    .withSubject(userDetails.getUsername())
                     .withExpiresAt(genExpiration())
                     .sign(algorithm);
             return token;

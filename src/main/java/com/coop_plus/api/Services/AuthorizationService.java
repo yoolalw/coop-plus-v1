@@ -21,8 +21,20 @@ public class AuthorizationService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDetails emp = employeeRepository.findByEmail(username).orElseThrow(NoSuchElementException::new);
-        UserDetails cli = clientRepository.findByEmail(username);
-        throw new UsernameNotFoundException("Usuario não encontrado.");
+
+
+        var employee = employeeRepository.findByEmail(username);
+
+        if (employee != null) {
+            return employee;
+        }
+
+        var client = clientRepository.findByEmail(username);
+
+        if (client != null) {
+            return client;
+        }
+
+        throw new UsernameNotFoundException("Usuário não encontrado.");
     }
 }
