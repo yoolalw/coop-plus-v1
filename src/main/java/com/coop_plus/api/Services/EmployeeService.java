@@ -24,7 +24,6 @@ public class EmployeeService {
         return repository.findById(id).orElseThrow(NoSuchElementException::new);
     }
 
-
     public EmployeeEntity atualizar(Integer id, EmployeeEntity employee) {
         EmployeeEntity exists = repository.findById(id).orElseThrow(NoSuchElementException::new);
         exists.setNomeCompleto(employee.getNomeCompleto());

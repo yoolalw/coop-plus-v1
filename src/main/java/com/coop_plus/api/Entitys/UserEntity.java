@@ -36,8 +36,11 @@ public class UserEntity implements UserDetails {
 
     @Pattern(regexp = "^[0-9]{2}\s[9]{1}\s[0-9]{4}[-][0-9]{4}$")
     private String telefone;
-    private String avaliacoes;
+    
     private UserRole role;
+
+    public UserEntity(String nomeCompleto, String email, String senha, String descricao, String telefone, UserRole role) {
+    }
 
 
     public Object getRole(UserRole userRole) {

@@ -9,6 +9,7 @@ import com.coop_plus.api.Entitys.EmployeeEntity;
 import com.coop_plus.api.Repositorys.ClientRepository;
 import com.coop_plus.api.Repositorys.EmployeeRepository;
 import com.coop_plus.api.Security.TokenService;
+import com.coop_plus.api.Services.UserService;
 import jakarta.validation.Valid;
 import org.hibernate.query.NativeQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ import org.springframework.web.bind.annotation.*;
 public class AuthenticationController {
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    UserService userService;
 
     @Autowired
     private TokenService tokenService;
@@ -57,26 +61,37 @@ public class AuthenticationController {
     }
 
     @PostMapping("/newClient")
-    public ResponseEntity<ClientEntity> cadastrarCliente(@Valid @RequestBody ClientDTO client) {
-        if (this.clientRepository.findByEmail(client.email()) != null) return ResponseEntity.badRequest().build();
+    public ResponseEntity<Void> cadastrarCliente(@Valid @RequestBody ClientDTO client) {
+        if (userService.emailExistente(client.email())) {
+            return ResponseEntity.badRequest().build();
+        }
         String bcrypt = new BCryptPasswordEncoder().encode(client.senha());
-        ClientEntity clientEntity = new ClientEntity(client.nomeCompleto(), client.endereco(), client.email(), bcrypt, client.cpf(), client.telefone(), client.avaliacoes(),client.role());
-        this.clientRepository.save(clientEntity);
-        System.out.println(client);
+        ClientEntity clientEntity = new ClientEntity(
+                client.nomeCompleto(), client.email(), bcrypt, client.descricao(), client.telefone(), client.role(), client.cpf(), client.endereco(), client.avaliacoes()
+        );
+
+        clientRepository.save(clientEntity);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/newEmployee")
-    public ResponseEntity<EmployeeEntity> cadastrarEmployer(@Valid @RequestBody EmployeeDTO employee) {
-        if (this.employeeRepository.findByEmail(employee.email()) != null) return ResponseEntity.badRequest().build();
+    public ResponseEntity<Void> cadastrarEmployee(@Valid @RequestBody EmployeeDTO employee) {
+        if (userService.emailExistente(employee.email())) {
+            return ResponseEntity.badRequest().build();
+        }
         String bcrypt = new BCryptPasswordEncoder().encode(employee.senha());
-        EmployeeEntity employeeEntity = new EmployeeEntity(employee.nomeCompleto(), employee.tipoServico(), employee.email(), bcrypt, employee.nomeEmpresa(), employee.descricao(), employee.cnpj(), employee.telefone(), employee.avaliacoes(),  employee.role());
-        this.employeeRepository.save(employeeEntity);
+        EmployeeEntity employeeEntity = new EmployeeEntity(
+                employee.nomeCompleto(), employee.tipoServico(), employee.email(),
+                bcrypt, employee.nomeEmpresa(), employee.descricao(),
+                employee.cnpj(), employee.telefone(), employee.avaliacoes(), employee.role()
+        );
+        employeeRepository.save(employeeEntity);
         return ResponseEntity.ok().build();
     }
 
+
     @GetMapping("/session")
-    public ResponseEntity<String> obterPerfil(){
+    public ResponseEntity<String> obterPerfil() {
         UserDetails usuario = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return ResponseEntity.ok("Seja bem-vindo, " + usuario.getUsername());
     }
