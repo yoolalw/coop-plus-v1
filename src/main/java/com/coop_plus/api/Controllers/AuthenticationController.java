@@ -45,7 +45,6 @@ public class AuthenticationController {
             var auth = authenticationManager.authenticate(usernamePassword);
 
             System.out.println("AUTENTICOU");
-
             var token = tokenService.generateToken(
                     (UserDetails) auth.getPrincipal());
 
@@ -61,7 +60,7 @@ public class AuthenticationController {
     public ResponseEntity<ClientEntity> cadastrarCliente(@Valid @RequestBody ClientDTO client) {
         if (this.clientRepository.findByEmail(client.email()) != null) return ResponseEntity.badRequest().build();
         String bcrypt = new BCryptPasswordEncoder().encode(client.senha());
-        ClientEntity clientEntity = new ClientEntity(client.nomeCompleto(), client.endereco(), client.email(), bcrypt, client.cpf(), client.telefone(), client.role());
+        ClientEntity clientEntity = new ClientEntity(client.nomeCompleto(), client.endereco(), client.email(), bcrypt, client.cpf(), client.telefone(), client.avaliacoes(),client.role());
         this.clientRepository.save(clientEntity);
         System.out.println(client);
         return ResponseEntity.ok().build();
@@ -71,7 +70,7 @@ public class AuthenticationController {
     public ResponseEntity<EmployeeEntity> cadastrarEmployer(@Valid @RequestBody EmployeeDTO employee) {
         if (this.employeeRepository.findByEmail(employee.email()) != null) return ResponseEntity.badRequest().build();
         String bcrypt = new BCryptPasswordEncoder().encode(employee.senha());
-        EmployeeEntity employeeEntity = new EmployeeEntity(employee.nomeCompleto(), employee.tipoServico(), employee.email(), bcrypt, employee.nomeEmpresa(), employee.descricao(), employee.cnpj(), employee.telefone(), employee.role());
+        EmployeeEntity employeeEntity = new EmployeeEntity(employee.nomeCompleto(), employee.tipoServico(), employee.email(), bcrypt, employee.nomeEmpresa(), employee.descricao(), employee.cnpj(), employee.telefone(), employee.avaliacoes(),  employee.role());
         this.employeeRepository.save(employeeEntity);
         return ResponseEntity.ok().build();
     }

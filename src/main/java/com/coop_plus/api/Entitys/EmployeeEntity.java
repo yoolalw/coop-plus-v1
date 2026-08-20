@@ -19,102 +19,16 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmployeeEntity implements UserDetails {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    private Integer id;
-
-    @Pattern(
-            regexp = "^[A-Za-zÀ-ÿ]+(?: [A-Za-zÀ-ÿ]+)*$",
-            message = "O nome deve conter apenas letras."
-    )
-    private String nomeCompleto;
-
+@PrimaryKeyJoinColumn(name = "idUser")
+public class EmployeeEntity extends UserEntity{
     @Pattern(
             regexp = "^[A-Za-zÀ-ÿ]+(?: [A-Za-zÀ-ÿ]+)*$",
             message = "O tipo de serviço só pode ser dito com palavras."
     )
     private String tipoServico;
-    private String email;
-    private String senha;
     private String nomeEmpresa;
-
-
-    private String descricao;
-
     @Pattern(regexp = "^[0-9]{2}[.][0-9]{3}[.][0-9]{3}[/][0-9]{4}[-][0-9]{2}")
     private String cnpj;
-
-    @Pattern(regexp = "^[0-9]{2}\s[9]{1}\s[0-9]{4}[-][0-9]{4}$")
-    private String telefone;
-
-    private UserRole role;
-
-    public EmployeeEntity(String nomeCompleto, String tipoServico, String email,
-                          String senha, String nomeEmpresa, String descricao,
-                          String cnpj, String telefone, UserRole role) {
-        this.nomeCompleto = nomeCompleto;
-        this.tipoServico = tipoServico;
-        this.email = email;
-        this.senha = senha;
-        this.nomeEmpresa = nomeEmpresa;
-        this.descricao = descricao;
-        this.cnpj = cnpj;
-        this.telefone = telefone;
-        this.role = role;
-    }
-
-    /*
-
-    {
-        "nomeCompleto": "",
-        "tipoServico": "",
-        "email": "",
-        "senha":"",
-        "nomeEmpresa":"",
-        "descricao":"",
-        "cnpj": "00.000.000/1111-11",
-        "telefone": "01 9 1111-1111",
-        "role": "EMPLOYEE"
-    }
-
-     */
-
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
-    }
-
-    @Override
-    public @Nullable String getPassword() {
-        return senha;
-    }
-
-    @Override
-    public String getUsername() {
-        return email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return UserDetails.super.isAccountNonExpired();
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return UserDetails.super.isAccountNonLocked();
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return UserDetails.super.isCredentialsNonExpired();
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return UserDetails.super.isEnabled();
-    }
 
 
 }
