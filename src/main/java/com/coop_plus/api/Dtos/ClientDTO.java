@@ -4,5 +4,5 @@ import com.coop_plus.api.Entitys.UserRole;
 
 public record ClientDTO(String nomeCompleto, String email, String senha,
                         String descricao, String telefone, UserRole role, String cpf, String endereco,
-                        Integer avaliacoes) {
+                        Integer avaliacoes, String foto_perfil) {
 }

@@ -29,9 +29,12 @@ public class EmployeeEntity extends UserEntity {
     private String cnpj;
     private Integer avaliacoes;
 
-    public EmployeeEntity(String nomeCompleto, String email, String senha, String descricao, String telefone, Integer avaliacoes,
-                          UserRole role, String tipoServico,String nomeEmpresa, String cnpj){
-        super(nomeCompleto, email, senha, descricao, telefone, role);
+    public EmployeeEntity(String nomeCompleto, String email, String senha, String descricao,
+                          String telefone, Integer avaliacoes,
+                          UserRole role, String tipoServico,String nomeEmpresa,
+                          String cnpj, String foto_perfil){
+
+        super(nomeCompleto, email, senha, descricao, telefone, foto_perfil,role);
         this.tipoServico = tipoServico;
         this.nomeEmpresa = nomeEmpresa;
         this.cnpj = cnpj;

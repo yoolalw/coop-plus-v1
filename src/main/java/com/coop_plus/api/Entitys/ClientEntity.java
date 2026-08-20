@@ -28,8 +28,9 @@ public class ClientEntity extends UserEntity {
     private Integer avaliacoes;
 
     public ClientEntity(String nomeCompleto, String email, String senha,
-                        String descricao, String telefone, UserRole role, String cpf, String endereco, Integer avaliacoes){
-        super(nomeCompleto, email, senha, descricao, telefone, role);
+                        String descricao, String telefone, UserRole role, String cpf, String endereco, Integer avaliacoes,
+                        String foto_perfil){
+        super(nomeCompleto, email, senha, descricao, telefone, foto_perfil, role);
         this.cpf = cpf;
         this.endereco = endereco;
         this.avaliacoes = avaliacoes;

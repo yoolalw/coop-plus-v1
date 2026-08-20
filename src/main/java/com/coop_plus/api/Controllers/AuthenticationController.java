@@ -67,7 +67,7 @@ public class AuthenticationController {
         }
         String bcrypt = new BCryptPasswordEncoder().encode(client.senha());
         ClientEntity clientEntity = new ClientEntity(
-                client.nomeCompleto(), client.email(), bcrypt, client.descricao(), client.telefone(), client.role(), client.cpf(), client.endereco(), client.avaliacoes()
+                client.nomeCompleto(), client.email(), bcrypt, client.descricao(), client.telefone(), client.role(), client.cpf(), client.endereco(), client.avaliacoes(), client.foto_perfil()
         );
 
         clientRepository.save(clientEntity);
@@ -81,9 +81,9 @@ public class AuthenticationController {
         }
         String bcrypt = new BCryptPasswordEncoder().encode(employee.senha());
         EmployeeEntity employeeEntity = new EmployeeEntity(
-                employee.nomeCompleto(), employee.tipoServico(), employee.email(),
-                bcrypt, employee.nomeEmpresa(), employee.descricao(),
-                employee.cnpj(), employee.telefone(), employee.avaliacoes(), employee.role()
+                employee.nomeCompleto(), employee.email(), bcrypt, employee.descricao(),
+                employee.telefone(), employee.avaliacoes(), employee.role(), employee.tipoServico(),
+                employee.nomeEmpresa(), employee.cnpj(), employee.foto_perfil()
         );
         employeeRepository.save(employeeEntity);
         return ResponseEntity.ok().build();
