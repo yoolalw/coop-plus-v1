@@ -89,6 +89,9 @@ public class AuthenticationController {
         return ResponseEntity.ok().build();
     }
 
+    // "nomeCompleto": "", "email":"", "senha":"", "descricao":"", "telefone":"", "avaliacoes":0, "role":"EMPLOYEE", "tipoServico":"", "nomeEmpresa":"", "cnpj":"", "foto_perfil":""
+
+
 
     @GetMapping("/session")
     public ResponseEntity<String> obterPerfil() {

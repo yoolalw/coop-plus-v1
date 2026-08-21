@@ -14,12 +14,11 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "clients")
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@PrimaryKeyJoinColumn(name = "idUser")
 public class ClientEntity extends UserEntity {
     @Pattern(regexp = "^[0-9]{3}[.][0-9]{3}[.][0-9]{3}[-][0-9]{2}$", message = "CPF não encontrado.")
     private String cpf;

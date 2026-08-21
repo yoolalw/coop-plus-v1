@@ -14,11 +14,12 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name="user")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "tipo")
 public class UserEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

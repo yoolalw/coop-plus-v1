@@ -15,12 +15,11 @@ import java.util.List;
 import java.util.concurrent.SubmissionPublisher;
 
 @Entity
-@Table(name = "employeers")
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@PrimaryKeyJoinColumn(name = "idUser")
 public class EmployeeEntity extends UserEntity {
     @Pattern(regexp = "^[A-Za-zÀ-ÿ]+(?: [A-Za-zÀ-ÿ]+)*$", message = "O tipo de serviço só pode ser dito com palavras.")
     private String tipoServico;
