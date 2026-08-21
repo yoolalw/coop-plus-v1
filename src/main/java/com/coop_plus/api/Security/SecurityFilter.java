@@ -2,6 +2,7 @@ package com.coop_plus.api.Security;
 
 import com.coop_plus.api.Entitys.ClientEntity;
 import com.coop_plus.api.Repositorys.ClientRepository;
+import com.coop_plus.api.Repositorys.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,19 +24,20 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Autowired
     TokenService tokenService;
     @Autowired
-    ClientRepository clientRepository;
+    UserRepository userRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         var token = this.recoverToken(request);
         if(token!=null){
             var subject =  tokenService.validateToken(token);
-            UserDetails details = clientRepository.findByEmail(subject);
+            UserDetails details = userRepository.findByEmail(subject);
             if(subject != null && !subject.isEmpty()){
-                UserDetails client = clientRepository.findByEmail(subject);
+                UserDetails client = userRepository.findByEmail(subject);
                 if(client !=null){
                     var authentication = new UsernamePasswordAuthenticationToken(client, null, client.getAuthorities());
                     SecurityContextHolder.getContext().setAuthentication(authentication);
+                    ;
                 }
             }
         }

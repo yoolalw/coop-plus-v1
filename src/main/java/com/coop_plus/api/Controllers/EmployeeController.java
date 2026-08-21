@@ -18,6 +18,7 @@ public class EmployeeController {
 
     @GetMapping
     public ResponseEntity<List<EmployeeEntity>> listar(){
+        System.out.println("Usuarios - Employee");
         return ResponseEntity.ok(service.listar());
     }
 
