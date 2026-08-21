@@ -16,7 +16,6 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "tipo")
@@ -43,6 +42,13 @@ public class UserEntity implements UserDetails {
     private UserRole role;
 
     public UserEntity(String nomeCompleto, String email, String senha, String descricao, String telefone, String foto_perfil,UserRole role) {
+        this.nomeCompleto = nomeCompleto;
+        this.email = email;
+        this.senha = senha;
+        this.descricao = descricao;
+        this.telefone = telefone;
+        this.foto_perfil = foto_perfil;
+        this.role = role;
     }
 
 
